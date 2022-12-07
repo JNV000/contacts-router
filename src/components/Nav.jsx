@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 export default function Nav() {
   const { contacts } = useLoaderData();
-  const q = useQ();
+  const q = useQ(); // get the query
 
   // Only filter if there is a query string
   const filteredContacts = q
@@ -13,7 +13,13 @@ export default function Nav() {
           contact.lastName.toLowerCase().includes(q.toLowerCase())
       )
     : contacts;
+  /*
+   * if we have the query string we filter it.
+   * For each contact we take either the first or lastname... ???
+   *
+   */
 
+  //
   return (
     <nav className="grow border-y-2 border-gray-300 py-2">
       <ul>

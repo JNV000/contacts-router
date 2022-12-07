@@ -2,9 +2,12 @@ import { Link, useOutletContext, useParams } from "react-router-dom";
 
 export default function Contact() {
   const { contacts } = useOutletContext();
+  // we get the list of contacts from the parent. Is Nav the parent in this case?
   const { id } = useParams();
+  // we get the id from the dynamic param of the current page/route's url.
 
   const clickedContact = contacts.find((contact) => contact.id === id);
+  // we find the contact with the matching id to display them
 
   return (
     <section className="flex gap-x-6 pt-8">

@@ -30,6 +30,7 @@ const loadContacts = async ({ request }) => {
   const contacts = await apiService.getContacts();
   return { contacts };
 };
+// so we get all the contacts
 
 // Keep this outside of component scope so it's not recreated on every render
 const router = createBrowserRouter([
