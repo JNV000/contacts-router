@@ -8,6 +8,7 @@ export default {
     // so this returns the entire 'db', since it just asks for the Base url that holds the DB
   },
   getContact: async (id) => {
+    // we are not using this one in this version.
     return await ky.get(`${BASE_URL}/${id}`).json();
     // this returns an entry in the db with the matching id?
   },

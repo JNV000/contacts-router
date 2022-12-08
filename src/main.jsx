@@ -34,6 +34,28 @@ const loadContacts = async () => {
 };
 // so we get all the contacts
 
+// const editContact = async ({ edittedContact }) => {
+const editContact = async ({ request, params }) => {
+  // await apiService.editContact(edittedContact);
+
+  // get form data from submit
+  const fd = await request.formData();
+
+  // turn form data into object
+  const updatedContact = Object.fromEntries(fd.entries());
+
+  // send the object to be put into the db
+  await apiService.updateContact({
+    id: params.id,
+    ...updatedContact,
+  });
+  // id must come from params as it is not a form input
+
+  // return redirect(`contacts/${edittedContact.id}`);
+  return redirect(`/contacts/${params.id}`);
+  // best to include / and use an absolute path
+};
+
 // Keep this outside of component scope so it's not recreated on every render
 const router = createBrowserRouter([
   {
@@ -41,6 +63,15 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Error />,
     loader: loadContacts,
+    // Prevent unnecessary database calls
+    shouldRevalidate: ({ currentParams, currentUrl, nextUrl }) => {
+      if (currentUrl.pathname.endsWith("edit")) return true;
+
+      // Don't revalidate if this is just an update to the 'q' query parameter
+      // Don't revalidate if this is just clicking on a contact (:id)
+      return !currentParams.id && !nextUrl.searchParams.get("q");
+    },
+    /*
     shouldRevalidate: ({ currentParams, nextUrl }) =>
       !currentParams.id && !nextUrl.searchParams.get("q"),
     // minimize number of fetch requests
@@ -48,6 +79,7 @@ const router = createBrowserRouter([
     // if the next url involves a query do not revalidate
     // Don't revalidate if the next url is just an update to the search
     // Don't revalidate if  this is just clicking on a contact (:id)
+    */
     action: createContact,
     id: "root",
     // These will be rendered in teh root outlet
@@ -60,6 +92,7 @@ const router = createBrowserRouter([
       {
         path: "contacts/:id/edit",
         element: <EditForm />,
+        action: editContact,
       },
     ],
   },

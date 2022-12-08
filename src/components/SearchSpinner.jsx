@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+// this file is not used
+
 export default function SearchSpinner({ isSearching }) {
   return (
     <>
