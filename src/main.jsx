@@ -56,6 +56,11 @@ const editContact = async ({ request, params }) => {
   // best to include / and use an absolute path
 };
 
+const deleteContact = async ({ params }) => {
+  await apiService.deleteContact(params.id);
+  redirect("/");
+};
+
 // Keep this outside of component scope so it's not recreated on every render
 const router = createBrowserRouter([
   {
@@ -93,6 +98,10 @@ const router = createBrowserRouter([
         path: "contacts/:id/edit",
         element: <EditForm />,
         action: editContact,
+      },
+      {
+        path: "contacts/:id/delete",
+        action: deleteContact,
       },
     ],
   },

@@ -1,5 +1,5 @@
 // import { Link, useOutletContext, useParams } from "react-router-dom";
-import { Link, useRouteLoaderData, useParams } from "react-router-dom";
+import { Form, Link, useRouteLoaderData, useParams } from "react-router-dom";
 
 export default function Contact() {
   /*
@@ -40,9 +40,11 @@ export default function Contact() {
           >
             Edit
           </Link>
-          <button type="button" className="button text-red-500">
-            Delete
-          </button>
+          <Form method="post" action={`/contacts/${clickedContact.id}/delete`}>
+            <button type="submit" className="button text-red-500">
+              Delete
+            </button>
+          </Form>
         </div>
       </div>
     </section>
