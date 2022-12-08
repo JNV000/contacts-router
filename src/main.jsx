@@ -42,6 +42,11 @@ const router = createBrowserRouter([
     loader: loadContacts,
     shouldRevalidate: ({ currentParams, nextUrl }) =>
       !currentParams.id && !nextUrl.searchParams.get("q"),
+    // minimize number of fetch requests
+    // otherwise typing in the search bar would keep rerendering and fetching
+    // if the next url involves a query do not revalidate
+    // Don't revalidate if the next url is just an update to the search
+    // Don't revalidate if  this is just clicking on a contact (:id)
     action: createContact,
     children: [
       {
