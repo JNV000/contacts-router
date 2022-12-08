@@ -7,7 +7,15 @@ export default function SearchCreateForm() {
   const q = useQ();
 
   return (
-    <Form className="flex px-4" method="post">
+    <Form
+      className="flex px-4"
+      method="post"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submit(e.target, { method: "post" }); // submit must be done before submit to tranfer input
+        e.target.reset();
+      }}
+    >
       <input
         id="q"
         aria-label="Search contacts"

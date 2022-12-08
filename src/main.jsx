@@ -58,7 +58,7 @@ const editContact = async ({ request, params }) => {
 
 const deleteContact = async ({ params }) => {
   await apiService.deleteContact(params.id);
-  redirect("/");
+  return redirect("/");
 };
 
 // Keep this outside of component scope so it's not recreated on every render
@@ -71,6 +71,7 @@ const router = createBrowserRouter([
     // Prevent unnecessary database calls
     shouldRevalidate: ({ currentParams, currentUrl, nextUrl }) => {
       if (currentUrl.pathname.endsWith("edit")) return true;
+      if (nextUrl.pathname === "/") return true;
 
       // Don't revalidate if this is just an update to the 'q' query parameter
       // Don't revalidate if this is just clicking on a contact (:id)
