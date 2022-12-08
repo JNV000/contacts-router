@@ -1,11 +1,9 @@
 import { Form, useParams, useRouteLoaderData } from "react-router-dom";
 import Input from "./Input";
+import useContact from "@hooks/useContact";
 
 export default function EditForm() {
-  const { contacts } = useRouteLoaderData("root");
-  const { id } = useParams();
-
-  const contact = contacts.find((contact) => contact.id === id);
+  const contact = useContact();
 
   return (
     <Form className="flex flex-col gap-y-4 px-4 pt-8" method="post">
