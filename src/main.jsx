@@ -26,7 +26,8 @@ const createContact = async ({ request }) => {
   return redirect(`contacts/${id}`);
 };
 
-const loadContacts = async ({ request }) => {
+// const loadContacts = async ({ request }) => {
+const loadContacts = async () => {
   const contacts = await apiService.getContacts();
   return { contacts };
 };
