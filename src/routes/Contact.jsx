@@ -1,8 +1,12 @@
-import { Link, useOutletContext, useParams } from "react-router-dom";
+// import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useRouteLoaderData, useParams } from "react-router-dom";
 
 export default function Contact() {
+  /*
   const { contacts } = useOutletContext();
   // we get the list of contacts from the parent. Is Nav the parent in this case?
+  */
+  const { contacts } = useRouteLoaderData("root");
 
   const { id } = useParams();
   // we get the id from the dynamic param of the current page/route's url.
