@@ -24,7 +24,11 @@ export default function Root() {
         </div>
         <Nav />
       </div>
-      <Outlet context={{ contacts }} />
+      {/* Placeholder for a child to render */}
+      <Outlet />
     </main>
   );
 }
+// old
+// <Outlet context={{ contacts }} />
+// no longer using useOutletContext

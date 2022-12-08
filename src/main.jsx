@@ -11,6 +11,7 @@ import Contact from "./routes/Contact";
 import Error from "./routes/Error";
 import Root from "./routes/Root";
 import apiService from "./services/api.service";
+import EditForm from "./components/EditForm";
 
 const createContact = async ({ request }) => {
   const fd = await request.formData();
@@ -49,10 +50,16 @@ const router = createBrowserRouter([
     // Don't revalidate if  this is just clicking on a contact (:id)
     action: createContact,
     id: "root",
+    // These will be rendered in teh root outlet
+    // :id can be accessed
     children: [
       {
         path: "contacts/:id",
         element: <Contact />,
+      },
+      {
+        path: "contacts/:id/edit",
+        element: <EditForm />,
       },
     ],
   },
