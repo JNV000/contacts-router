@@ -48,6 +48,7 @@ const router = createBrowserRouter([
     // Don't revalidate if the next url is just an update to the search
     // Don't revalidate if  this is just clicking on a contact (:id)
     action: createContact,
+    id: "root",
     children: [
       {
         path: "contacts/:id",
